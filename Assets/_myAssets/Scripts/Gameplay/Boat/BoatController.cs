@@ -26,8 +26,8 @@ public class BoatController : MonoBehaviour
             movement = Vector3.left;
         if (Input.GetKey(KeyCode.S))
             movement = Vector3.right;
-        if (Input.GetKey(KeyCode.A)) turnInput = 1f;  // Turn left
-        if (Input.GetKey(KeyCode.D)) turnInput = -1f; // Turn right
+        if (Input.GetKey(KeyCode.A)) turnInput = -1f;  // Turn left
+        if (Input.GetKey(KeyCode.D)) turnInput = 1f; // Turn right
 
         ApplyMovement(movement);
         ApplyDrag();
@@ -36,17 +36,16 @@ public class BoatController : MonoBehaviour
         Vector3 boatPosition = transform.position;
         float waveHeight = waveScript.GetHeight(boatPosition);
         Debug.Log($"Boat Position: {boatPosition}, Wave Height: {waveHeight}");
-        Vector3 waveForce = new Vector3(0, waveHeight, 0); // Adjust as needed
-        rb.AddForce(waveForce);
+        
+
         // Apply turning torque
         if (turnInput != 0f)
         {
-            // Torque for turning left or right
-            Vector3 turnTorqueVector = Vector3.up * turnInput * turnTorque;
-            rb.AddTorque(turnTorqueVector, ForceMode.Acceleration);
+            float rotationAngle = turnInput * turnTorque * Time.deltaTime;
+            Quaternion rotation = Quaternion.Euler(0f, rotationAngle, 0f);
+            transform.rotation = rotation * transform.rotation;
         }
 
-        Debug.Log($"Movement Direction: {movement}, Wave Force: {waveForce}, Linear Velocity: {rb.linearVelocity}");
     }
 
     private void ApplyMovement(Vector3 direction)

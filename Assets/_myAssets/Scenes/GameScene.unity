@@ -698,6 +698,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: WoodenBoat
       objectReference: {fileID: 0}
+    - target: {fileID: 3069936277360889647, guid: 27fb6f4bac518fc48a4a6b91b19df1f3, type: 3}
+      propertyPath: airDrag
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069936277360889647, guid: 27fb6f4bac518fc48a4a6b91b19df1f3, type: 3}
+      propertyPath: waterDrag
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7029423375895014259, guid: 27fb6f4bac518fc48a4a6b91b19df1f3, type: 3}
+      propertyPath: turnTorque
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
