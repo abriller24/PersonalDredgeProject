@@ -1,4 +1,5 @@
 using Mono.Cecil;
+using TMPro;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 [RequireComponent(typeof(Rigidbody))]  
@@ -66,12 +67,15 @@ public class WaterFloat : MonoBehaviour
         var gravity = Physics.gravity;
 
         rb.linearDamping = airDrag;
+
         if(WaterLine > Center.y)
         {
             rb.linearDamping = waterDrag;
             if (attachToSurface)
             {
-                rb.position = new Vector3(rb.position.x, WaterLine - CenterOffset.y, rb.position.z);
+                rb.position = new Vector3(rb.position.x, WaterLine, rb.position.z);
+                Debug.Log($"the water line is: {WaterLine}");
+            //rb.position = new Vector3(rb.position.x, rb.position.y, rb.position.z);
             }
             else
             {
@@ -79,7 +83,7 @@ public class WaterFloat : MonoBehaviour
                 transform.Translate(Vector3.up * waterLineDelta * 0.9f);
             }
         }
-        rb.AddForce(gravity * Mathf.Clamp(Mathf.Abs(WaterLine - Center.y), 0, 1));
+        //rb.AddForce(gravity * Mathf.Clamp(Mathf.Abs(WaterLine - Center.y), 0, 1));
 
         TargetUp = WaterPhysicsHelper.GetNormal(WaterLinePoints);
 

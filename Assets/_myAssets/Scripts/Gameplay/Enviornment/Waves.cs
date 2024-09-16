@@ -131,7 +131,7 @@ public class Waves : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     { 
         var verts = Mesh.vertices;
         for (int x = 0; x <= Dimension; x++)

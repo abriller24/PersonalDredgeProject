@@ -108,7 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boatMotor: {fileID: 5116162139307268629}
   boatPower: 500
-  turnTorque: 0.5
+  turnTorque: 25
   maxSpeed: 150
   drag: 0.1
 --- !u!114 &3069936277360889647

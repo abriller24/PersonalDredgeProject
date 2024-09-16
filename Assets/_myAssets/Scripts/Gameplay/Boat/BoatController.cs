@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BoatController : MonoBehaviour
@@ -17,35 +18,34 @@ public class BoatController : MonoBehaviour
         waveScript = FindFirstObjectByType<Waves>();
     }
 
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
         float turnInput = 0f;
 
         Vector3 movement = Vector3.zero;
         if (Input.GetKey(KeyCode.W))
-            movement = Vector3.left;
+            movement = -transform.right;
         if (Input.GetKey(KeyCode.S))
-            movement = Vector3.right;
+            movement = transform.right;
         if (Input.GetKey(KeyCode.A)) turnInput = -1f;  // Turn left
         if (Input.GetKey(KeyCode.D)) turnInput = 1f; // Turn right
 
         ApplyMovement(movement);
         ApplyDrag();
 
-        // Apply wave forces
+        // Get wave height
         Vector3 boatPosition = transform.position;
         float waveHeight = waveScript.GetHeight(boatPosition);
         Debug.Log($"Boat Position: {boatPosition}, Wave Height: {waveHeight}");
         
-
-        // Apply turning torque
+        // Apply turning
         if (turnInput != 0f)
         {
             float rotationAngle = turnInput * turnTorque * Time.deltaTime;
-            Quaternion rotation = Quaternion.Euler(0f, rotationAngle, 0f);
-            transform.rotation = rotation * transform.rotation;
+            Vector3 pivotPoint = transform.position; // Define the pivot point
+            Vector3 rotationAxis = Vector3.up; // Define the rotation axis
+            transform.RotateAround(pivotPoint, rotationAxis, rotationAngle);
         }
-
     }
 
     private void ApplyMovement(Vector3 direction)
