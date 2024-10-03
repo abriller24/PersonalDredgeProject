@@ -1,4 +1,4 @@
-using Mono.Cecil;
+
 using TMPro;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -9,6 +9,7 @@ public class WaterFloat : MonoBehaviour
     public float waterDrag = 10;
     [SerializeField] private Transform[] floatPoints;
     [SerializeField] private bool attachToSurface;
+    [SerializeField] private bool affectDirection = true;
 
     private Rigidbody rb;
     private Waves waves;
@@ -47,51 +48,55 @@ public class WaterFloat : MonoBehaviour
 
     private void Update()
     {
+        //default water surface
         var newWaterLine = 0f;
         var pointUnderWater = false;
 
-        for (int i = 0;i < floatPoints.Length;i++)
+        //set WaterLinePoints and WaterLine
+        for (int i = 0; i < floatPoints.Length; i++)
         {
+            //height
             WaterLinePoints[i] = floatPoints[i].position;
             WaterLinePoints[i].y = waves.GetHeight(floatPoints[i].position);
-            newWaterLine += WaterLinePoints[i].y / floatPoints.Length; 
+            newWaterLine += WaterLinePoints[i].y / floatPoints.Length;
             if (WaterLinePoints[i].y > floatPoints[i].position.y)
-            {
                 pointUnderWater = true;
-            }
         }
 
         var waterLineDelta = newWaterLine - WaterLine;
         WaterLine = newWaterLine;
 
+        //compute up vector
+        TargetUp = WaterPhysicsHelper.GetNormal(WaterLinePoints);
+
+        //gravity
         var gravity = Physics.gravity;
-
         rb.linearDamping = airDrag;
-
-        if(WaterLine > Center.y)
+        if (WaterLine > Center.y)
         {
             rb.linearDamping = waterDrag;
+            //under water
             if (attachToSurface)
             {
-                rb.position = new Vector3(rb.position.x, WaterLine, rb.position.z);
-                Debug.Log($"the water line is: {WaterLine}");
-            //rb.position = new Vector3(rb.position.x, rb.position.y, rb.position.z);
+                //attach to water surface
+                rb.position = new Vector3(rb.position.x, WaterLine - CenterOffset.y, rb.position.z);
             }
             else
             {
-                gravity = -Physics.gravity;
+                //go up
+                gravity = affectDirection ? TargetUp * -Physics.gravity.y : -Physics.gravity;
                 transform.Translate(Vector3.up * waterLineDelta * 0.9f);
             }
         }
-        //rb.AddForce(gravity * Mathf.Clamp(Mathf.Abs(WaterLine - Center.y), 0, 1));
+        rb.AddForce(gravity * Mathf.Clamp(Mathf.Abs(WaterLine - Center.y), 0, 1));
 
-        TargetUp = WaterPhysicsHelper.GetNormal(WaterLinePoints);
-
-        if(pointUnderWater)
+        if (pointUnderWater)
         {
+            //attach to water surface
             TargetUp = Vector3.SmoothDamp(transform.up, TargetUp, ref SmoothVectorRotation, 0.2f);
             rb.rotation = Quaternion.FromToRotation(transform.up, TargetUp) * rb.rotation;
         }
+
     }
 
 

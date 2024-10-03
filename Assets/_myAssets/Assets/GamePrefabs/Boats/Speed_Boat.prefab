@@ -74,9 +74,6 @@ GameObject:
   - component: {fileID: 7942341658964157594}
   - component: {fileID: 4084185944680223936}
   - component: {fileID: 4789017993149893304}
-  - component: {fileID: 6709043875722604079}
-  - component: {fileID: 7538177400272575463}
-  - component: {fileID: 1070020408770269551}
   m_Layer: 0
   m_Name: Speed_Boat
   m_TagString: Untagged
@@ -92,7 +89,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6609735121691466060}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.70710677, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 3.4135575, y: -3.3292036, z: 3.1389184}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -102,7 +99,7 @@ Transform:
   - {fileID: 8563540313104667997}
   - {fileID: 6363048960826515611}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &7942341658964157594
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -177,65 +174,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.2816653, y: 1.7805746, z: 2.2281017}
   m_Center: {x: -0.45823455, y: 0.50299907, z: 0}
---- !u!54 &6709043875722604079
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6609735121691466060}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: 0.5
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &7538177400272575463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6609735121691466060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a5a4741a3522034cb9c4269c0d0a4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  airDrag: 1
-  waterDrag: 10
-  floatPoints:
-  - {fileID: 3963010463859891569}
-  - {fileID: 7014123304899418596}
-  - {fileID: 8563540313104667997}
-  - {fileID: 6363048960826515611}
-  attachToSurface: 0
---- !u!114 &1070020408770269551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6609735121691466060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4331b812ab3da9479744540930a15be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7853034502564471097
 GameObject:
   m_ObjectHideFlags: 0

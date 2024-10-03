@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class BoatController : MonoBehaviour
 {
-    [SerializeField] private Transform boatMotor;
     [SerializeField] private float boatPower = 10f;
     [SerializeField] private float turnTorque = 1f;
     [SerializeField] private float maxSpeed = 10f;
@@ -12,13 +11,14 @@ public class BoatController : MonoBehaviour
     private Rigidbody rb;
     private Waves waveScript;
 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         waveScript = FindFirstObjectByType<Waves>();
     }
 
-    public void FixedUpdate()
+    public void Update()
     {
         float turnInput = 0f;
 
@@ -46,6 +46,7 @@ public class BoatController : MonoBehaviour
             Vector3 rotationAxis = Vector3.up; // Define the rotation axis
             transform.RotateAround(pivotPoint, rotationAxis, rotationAngle);
         }
+
     }
 
     private void ApplyMovement(Vector3 direction)
@@ -69,3 +70,4 @@ public class BoatController : MonoBehaviour
         rb.linearVelocity *= 1 - (drag * Time.deltaTime);
     }
 }
+
